@@ -13,6 +13,10 @@ import 'element-ui/lib/theme-chalk/index.css'// 目录加./
 //  vue-cli提供的一个绝对路径别名  src绝对路径
 // import router from '@/router'
 
+// 简单配置axios
+import axios from 'axios'
+Vue.prototype.$http = axios
+
 // 使用element-ui库
 Vue.use(elementui)
 

@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '@/views/login/'
+import Login from '../views/login'
+import home from '../views/home'
 // 第一步：安装： npm i vue-router
 // 第二步：引入：src/router/index.js 和 import VueRouter from 'vue-router'
 // 第三步：使用：import Vue from 'vue' 和  Vue.use(VueRouter )
@@ -10,7 +11,9 @@ const router = new VueRouter({
   routes: [
     // 路由规则 写一个功能追加一个
     // 登录
-    { path: '/login', component: Login }
+
+    { path: '/login', component: Login },
+    { path: '/', component: home }
   ]
 })
 // 第五步：导出实例

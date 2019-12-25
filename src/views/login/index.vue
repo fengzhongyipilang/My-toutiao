@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <el-card class="my-card">
-      <el-form :model="loginForm" :rules="loginRules">
+      <el-form ref="loginForm" :model="loginForm" :rules="loginRules">
         <img src="../../assets/images/logo_index.png" alt />
         <!-- 表单 -->
         <!-- -----------------手机号表单------------------ -->
@@ -22,7 +22,7 @@
         </el-form>
         <!-- -----------------登录--------------------- -->
         <el-form>
-          <el-button type="primary" style="width:100%">登录</el-button>
+          <el-button @click="login()" type="primary" style="width:100%">登录</el-button>
         </el-form>
       </el-form>
     </el-card>
@@ -32,6 +32,14 @@
 <script>
 export default {
   data () {
+    const checkMobile = (rule, value, callback) => {
+      // 是否合法手机号 自己的校验逻辑
+      if (!/^1[3-9]\d{9}$/.test(value)) {
+        return callback(new Error('手机格式不对'))
+      }
+      callback()
+    }
+
     return {
       // 容器
       loginForm: {
@@ -42,7 +50,9 @@ export default {
       loginRules: {
         // 给字段添加校验规则（多个）
         mobile: [
-          { required: true, message: ' 请输入手机号', trigger: 'blur' }
+          { required: true, message: ' 请输入手机号', trigger: 'blur' },
+          // 自定义校验规则
+          { validate: checkMobile, trigger: 'blur' }
         ],
         code: [
           { required: true, message: ' 请输入手机号', trigger: 'blur' },
@@ -50,6 +60,27 @@ export default {
 
         ]
       }
+    }
+  },
+  methods: {
+    // 生命周期钩子函数（当组件渲染完毕后执行）
+    login () {
+      // 调用 validate 对整体表进行校验
+      this.$refs.loginForm.validate((valid) => {
+        if (valid) {
+          // 校验成功  调用登录接口
+          this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
+            .then(res => {
+              // 成功 跳转
+              // 注意 登录 不够完善
+              this.$router.push('/')
+            })
+            .catch(() => {
+              // 失败 提示
+              this.$message.error('手机号或验证码错误')
+            })
+        }
+      })
     }
   }
 }
