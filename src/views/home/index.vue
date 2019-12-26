@@ -1,17 +1,18 @@
 <template>
   <el-container class="my-container">
     <!--  测导航-->
-    <el-aside width="200px" class="my-aside">
+    <el-aside :width="isOpen?'200px' : '64px'" class="my-aside">
 <!--      logo图-->
-      <div class="logo"></div>
+      <div class="logo" :class="{myLogo: !isOpen}"></div>
 <!--      测导航栏------------------------------------------>
+ <!-- :collapse="isCollapse" -->
       <el-menu
         default-active="/"
         class="el-menu-vertical-demo el-menu"
         background-color="#002033"
         text-color="#fff"
         active-text-color="#ffd04b"
-        :collapse="isCollapse"
+        :collapse="!isOpen"
         :collapse-transition="false"
        router
       >
@@ -51,7 +52,7 @@
     <el-container>
 <!--      头-->
       <el-header class="my-header">
-        <span class="el-icon-s-fold myspan"></span>
+        <span @click="toggleAside" class="el-icon-s-fold myspan"></span>
         <span class="myspan">江苏传智播客</span>
 
         <!--    下拉菜单-->
@@ -72,14 +73,27 @@
       </el-header>
 <!--      体-->
       <el-main>
-        <div class=""></div>
+      <router-view></router-view>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
-  export default {}
+export default {
+  // 数据在data中声明
+  data () {
+    return {
+      isOpen: true
+    }
+  },
+  methods: {
+    toggleAside () {
+      // 切换左菜单
+      this.isOpen = !this.isOpen
+    }
+  }
+}
 </script>
 
 <style scoped lang="less">
@@ -113,13 +127,18 @@
     }
     /*头部样式结束*/
 
-
     /*测导航栏*/
     .logo{
-       width: 100%;
+      width: 100%;
       height: 60px;
       background: #002244 url(../../assets/images/logo_admin.png) no-repeat
         center / 140px auto;
+    }
+    .myLogo{
+      // 写在logo样式后将来覆盖logo的样式
+      background-image: url(../../assets/images/logo_admin_01.png);
+      background-size: 36px auto;
+
     }
     .el-menu {
       border-right: 0;

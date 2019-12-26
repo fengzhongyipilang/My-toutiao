@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data () {
     const checkMobile = (rule, value, callback) => {
@@ -44,8 +45,8 @@ export default {
       // 容器
       loginForm: {
         // 声明mobile
-        mobile: '',
-        code: ''
+        mobile: '1391111111',
+        code: '246810'
       },
       loginRules: {
         // 给字段添加校验规则（多个）
@@ -73,7 +74,11 @@ export default {
             .then(res => {
               // 成功 跳转
               // 注意 登录 不够完善
-              this.$router.push('/')
+              // res 是响应对象  res.data 是响应主体 将来会使用
+              // res.data.data 就是用户信息
+              // 存储用户信息
+              store.setUser(res.data.data)
+              this.$router.push('/')// 跳转首页
             })
             .catch(() => {
               // 失败 提示
