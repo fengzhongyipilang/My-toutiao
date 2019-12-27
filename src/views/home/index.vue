@@ -56,17 +56,17 @@
         <span class="myspan">江苏传智播客</span>
 
         <!--    下拉菜单-->
-        <el-dropdown class="my-dropdown">
+        <el-dropdown class="my-dropdown" @command="handler">
 <!--          用户信息-->
            <span class="el-dropdown-link">
-            <img class="avatar" src="../../assets/images/avatar.jpg" alt="">
-            <span class="name"> 用户名称</span>
+            <img class="avatar" :src="photo" alt="">
+            <span class="name">{{name}}</span>
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
 <!--  下拉详情-->
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item icon="el-icon-setting">个人设置</el-dropdown-item>
-            <el-dropdown-item icon="el-icon-unlock">退出登录</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-setting" command="setting">个人设置</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-unlock" command="logout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
 
@@ -80,6 +80,7 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   // 数据在data中声明
   data () {
@@ -87,10 +88,37 @@ export default {
       isOpen: true
     }
   },
+  created () {
+    // 从本地获取用户信息
+    const user = store.getUser()
+    this.name = user.name
+    this.photo = user.photo
+  },
   methods: {
     toggleAside () {
       // 切换左菜单
       this.isOpen = !this.isOpen
+      // 个人设置
+    },
+    // 1使用组件注意，绑定原生事件的时候注意组件是否支持了这个事件
+    // 4按键修饰符 .native
+    setting () {
+      this.$router.push('/setting')
+    },
+    // 退出登录
+    logout () {
+      // 1. 删除本地的用户信息
+      store.delUser()
+      // 2. 跳转到登录
+      this.$router.push('/login')
+    },
+    handler (command) {
+      // 判断值  setting 还是 logout
+      // 如果 command === setting 调用  this.setting()
+      // 如果 command === logout 调用  this.logout()
+      // 意思：const o = {a:10,b:20}  等价  o.a === o['a']
+    //  if(command === "setting")
+      this[command]()
     }
   }
 }

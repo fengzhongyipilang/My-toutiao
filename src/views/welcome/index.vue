@@ -1,11 +1,15 @@
 <template>
-    <div>
-      <img src="../../assets/images/welcome.jpg" alt="">
-    </div>
+  <div>
+    <img src="../../assets/images/welcome.jpg" alt />
+    <button>获取数据</button>
+  </div>
 </template>
 
 <script>
 export default {
+  created () {
+    this.$http.get()
+  }
 }
 </script>
 
@@ -14,7 +18,7 @@ div {
   text-align: center;
   vertical-align: middle;
   img {
-    margin-top:10px;
+    margin-top: 10px;
   }
 }
 </style>

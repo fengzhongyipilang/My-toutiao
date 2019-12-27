@@ -12,7 +12,7 @@ Vue.use(VueRouter)
 // 第四步：实例化
 const router = new VueRouter({
   routes: [
-    // 路由规则 写一个功能追加一个
+    // 路由规则 写一个功能追加一个+
     // 登录
 
     { path: '/login', component: Login },

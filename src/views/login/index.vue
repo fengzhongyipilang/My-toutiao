@@ -45,7 +45,7 @@ export default {
       // 容器
       loginForm: {
         // 声明mobile
-        mobile: '1391111111',
+        mobile: '13911111111',
         code: '246810'
       },
       loginRules: {
@@ -67,23 +67,34 @@ export default {
     // 生命周期钩子函数（当组件渲染完毕后执行）
     login () {
       // 调用 validate 对整体表进行校验
-      this.$refs.loginForm.validate((valid) => {
+      this.$refs.loginForm.validate(async (valid) => {
         if (valid) {
           // 校验成功  调用登录接口
-          this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
-            .then(res => {
-              // 成功 跳转
-              // 注意 登录 不够完善
-              // res 是响应对象  res.data 是响应主体 将来会使用
-              // res.data.data 就是用户信息
-              // 存储用户信息
-              store.setUser(res.data.data)
-              this.$router.push('/')// 跳转首页
-            })
-            .catch(() => {
-              // 失败 提示
-              this.$message.error('手机号或验证码错误')
-            })
+        //   this.$http.post('http://ttapi.research.itcast.cn/mp/v1_0/authorizations', this.loginForm)
+        //     .then(res => {
+        //       // 成功 跳转
+        //       // 注意 登录 不够完善
+        //       // res 是响应对象  res.data 是响应主体 将来会使用
+        //       // res.data.data 就是用户信息
+        //       // 存储用户信息
+        //       store.setUser(res.data.data)
+        //       this.$router.push('/')// 跳转首页
+        //     })
+        //     .catch(() => {
+        //       // 失败 提示
+        //       this.$message.error('手机号或验证码错误')
+        //     })
+          try {
+            // 发请求
+            const { data: { data } } = await this.$http.post('authorizations', this.loginForm)
+            // 保存数据
+            store.setUser(data)
+            // 跳转
+            this.$router.push('/')
+          } catch (e) {
+            // 进行错误提示即可
+            this.$message.error('手机号或验证码错误')
+          }
         }
       })
     }

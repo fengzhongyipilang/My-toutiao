@@ -14,7 +14,7 @@ import 'element-ui/lib/theme-chalk/index.css'// 目录加./
 // import router from '@/router'
 
 // 简单配置axios
-import axios from 'axios'
+import axios from '@/api'
 Vue.prototype.$http = axios
 
 // 使用element-ui库
