@@ -7,7 +7,7 @@
 <!--      测导航栏------------------------------------------>
  <!-- :collapse="isCollapse" -->
       <el-menu
-        default-active="/"
+        :default-active="$route.path"
         class="el-menu-vertical-demo el-menu"
         background-color="#002033"
         text-color="#fff"

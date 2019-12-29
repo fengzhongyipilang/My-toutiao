@@ -15,6 +15,14 @@ import 'element-ui/lib/theme-chalk/index.css'// 目录加./
 
 // 简单配置axios
 import axios from '@/api'
+
+// 注册全局组件
+import MyBread from '@/components/my-bread'
+
+import myPlugin from '@/plugin'
+Vue.component('my-bread', MyBread)
+Vue.use(myPlugin)
+
 Vue.prototype.$http = axios
 
 // 使用element-ui库

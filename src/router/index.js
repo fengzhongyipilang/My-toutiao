@@ -5,6 +5,7 @@ import home from '../views/home'
 import welcome from '../views/welcome/index'
 import notFound from '../views/404'
 import store from '../store'
+import Article from '@/views/article'
 // 第一步：安装： npm i vue-router
 // 第二步：引入：src/router/index.js 和 import VueRouter from 'vue-router'
 // 第三步：使用：import Vue from 'vue' 和  Vue.use(VueRouter )
@@ -19,10 +20,12 @@ const router = new VueRouter({
     { path: '/',
       component: home,
       children: [
-        { path: '/', component: welcome }
+        { path: '/', component: welcome },
+        { path: '/article', name: 'article', component: Article }
       ]
     },
-    { path: '*', component: notFound }// 路由规则应该写在所有规则的下面。
+
+    { path: '*', component: notFound }, // 路由规则应该写在所有规则的下面。
   ]
 })
 // 前置导航守卫

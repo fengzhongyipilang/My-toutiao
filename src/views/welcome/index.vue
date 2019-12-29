@@ -1,7 +1,7 @@
 <template>
   <div>
     <img src="../../assets/images/welcome.jpg" alt />
-    <button>获取数据</button>
+    <!-- <button>获取数据</button> -->
   </div>
 </template>
 
@@ -19,6 +19,7 @@ div {
   vertical-align: middle;
   img {
     margin-top: 10px;
+    vertical-align: middle;
   }
 }
 </style>
