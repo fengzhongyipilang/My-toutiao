@@ -1,3 +1,4 @@
+// this is：路由级别组件（页面级别组件）
 <template>
   <el-container class="my-container">
     <!--  测导航-->

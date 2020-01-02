@@ -1,3 +1,4 @@
+// 路由相关代码--路由配置---------------------------------------
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/login'
@@ -6,6 +7,7 @@ import welcome from '../views/welcome/index'
 import notFound from '../views/404'
 import store from '../store'
 import Article from '@/views/article'
+import Image from '@/views/image'
 // 第一步：安装： npm i vue-router
 // 第二步：引入：src/router/index.js 和 import VueRouter from 'vue-router'
 // 第三步：使用：import Vue from 'vue' 和  Vue.use(VueRouter )
@@ -21,11 +23,14 @@ const router = new VueRouter({
       component: home,
       children: [
         { path: '/', component: welcome },
-        { path: '/article', name: 'article', component: Article }
+        // 文章管理
+        { path: '/article', name: 'article', component: Article },
+        // 图片素材管理
+        { path: '/image', component: Image }
       ]
     },
 
-    { path: '*', component: notFound }, // 路由规则应该写在所有规则的下面。
+    { path: '*', component: notFound } // 路由规则应该写在所有规则的下面。
   ]
 })
 // 前置导航守卫

@@ -1,3 +1,4 @@
+// this is：路由级别组件（页面级别组件）
 <template>
   <div class="container">
     <el-card class="my-card">
@@ -56,7 +57,7 @@ export default {
           { validate: checkMobile, trigger: 'blur' }
         ],
         code: [
-          { required: true, message: ' 请输入手机号', trigger: 'blur' },
+          { required: true, message: ' 请输入验证码', trigger: 'blur' },
           { len: 6, message: '验证码长度为6位', trigger: 'blur' }
 
         ]
@@ -80,7 +81,7 @@ export default {
         //       store.setUser(res.data.data)
         //       this.$router.push('/')// 跳转首页
         //     })
-        //     .catch(() => {
+        //     .catch(e => {
         //       // 失败 提示
         //       this.$message.error('手机号或验证码错误')
         //     })

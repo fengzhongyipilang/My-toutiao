@@ -1,3 +1,4 @@
+// this is：路由级别组件（页面级别组件）
 <template>
   <div>
     <img src="../../assets/images/welcome.jpg" alt />

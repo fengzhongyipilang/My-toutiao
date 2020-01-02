@@ -1,3 +1,4 @@
+// api（接口）调接口 axios相关代码
 // 配置一个符合项目需要的axios  导出去进行全局的配置
 import axios from 'axios'
 import store from '@/store'

@@ -1,3 +1,4 @@
+// this is：路由级别组件（页面级别组件）
 <template>
   <div>
     <!-- 筛选项 -->
@@ -113,7 +114,7 @@
 </template>
 
 <script>
-import { log } from 'util'
+// import { log } from 'util'
 export default {
   data () {
     return {
@@ -143,6 +144,25 @@ export default {
   },
 
   methods: {
+    // 删除文章
+    async delArticle (articleId) {
+      // 确认框
+      this.$confirm('老铁，此操作将永久删除该文章, 是否继续?', '温馨提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        // 点击确认
+        // 地址  articles/id  请求 delete
+        // get 获取数据 post 添加数据 delete 删除属性 put 完整修改数据 patch 局部修改数据
+        await this.$http.delete(`articles/${articleId}`)
+        // 代码走这 成功
+        this.$message.success('删除成功')
+        this.getArticles()
+      }).catch(() => {
+        // 点击取消
+      })
+    },
     //   获取频道选项数据
     async getChannelOptions () {
       const {

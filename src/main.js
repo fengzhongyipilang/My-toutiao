@@ -1,3 +1,7 @@
+// main.js入口文件职责：1 做全局范围内的依赖和配置
+//                     2 创建一个vue根实例
+
+// 做依赖-----------------------------------------------------------------
 import Vue from 'vue'
 import App from './App.vue'
 // 导入elementui库
@@ -20,6 +24,8 @@ import axios from '@/api'
 import MyBread from '@/components/my-bread'
 
 import myPlugin from '@/plugin'
+// 做依赖-----------------------------------------------------------------
+
 Vue.component('my-bread', MyBread)
 Vue.use(myPlugin)
 
@@ -28,9 +34,10 @@ Vue.prototype.$http = axios
 // 使用element-ui库
 Vue.use(elementui)
 
-// 这是日志的详细
+// 这是日志的详细与否 生产环境（上线） 开发环境（写代码环节）
+Vue.config.productionTip = false//是否开启生产环境提示
 
-Vue.config.productionTip = false
+// 根实例配置插件-----------------------------------------------------------------
 
 new Vue({
 
